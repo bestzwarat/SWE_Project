@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<resources>
+
+ 		<string-array name="list_view">
+ 		    <item>@string/sound</item>>
+ 			<item>@string/game</item>
+ 		</string-array>
+ 		
+ 		<string-array name="list_view2">
+ 		    <item>@string/record</item>
+ 		</string-array>
+ 		
+</resources>
+	
