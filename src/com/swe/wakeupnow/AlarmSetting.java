@@ -1,7 +1,9 @@
 package com.swe.wakeupnow;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -18,14 +20,15 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 import java.io.*;
 
+import com.swe.wakeupnow.FeedReaderContract.FeedEntry;
+
 public class AlarmSetting extends Activity {
 
 	private Button mCancel;
 	private Button mSave;
 	private ListView lsvSetting;
-	private TimePicker tmpSetting;
-
-	final String TABLE_NAME = "t_alarm";
+	private TimePicker timeSetting;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,7 +38,7 @@ public class AlarmSetting extends Activity {
 		mCancel = (Button) findViewById(R.id.btcalcel);
 		mSave = (Button) findViewById(R.id.btsave);
 		lsvSetting = (ListView)findViewById(R.id.lsvSetting);
-		tmpSetting = (TimePicker)findViewById(R.id.timePicker1);
+		timeSetting = (TimePicker)findViewById(R.id.timePicker);
 		
 		mCancel.setOnClickListener(new OnClickListener() {
 			@Override
@@ -47,11 +50,11 @@ public class AlarmSetting extends Activity {
 		});
 		
 		mSave.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
-				
-				
+				int hh = timeSetting.getCurrentHour();
+				int mm = timeSetting.getCurrentMinute();
+//				saveSetting(hh, mm);
 			}
 		});
 		
@@ -79,36 +82,54 @@ public class AlarmSetting extends Activity {
 	
 	}
 	
-	private void saveSetting(){
-		 
+	private void saveSetting(int hh,int mm){
 		 AlarmDbHelper dbHelper = new AlarmDbHelper(getBaseContext());
-		 SQLiteDatabase db = dbHelper.getReadableDatabase();
+		
+		// Gets the data repository in write mode
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-		// Define a projection that specifies which columns from the database
-		// you will actually use after this query.
-		String[] projection = {"id","hh","tt"};
+		// Create a new map of values, where column names are the keys
+		ContentValues values = new ContentValues();
+		values.put(FeedEntry.COLUMN_NAME_HOUR, hh);
+		values.put(FeedEntry.COLUMN_NAME_MINUTE, mm);
 
-		// How you want the results sorted in the resulting Cursor
-		String sortOrder = "id DESC";
+		// Insert the new row, returning the primary key value of the new row
+		long newRowId;
+		newRowId = db.insert(
+		         FeedEntry.TABLE_NAME,
+		         "null",
+		         values);
+		 
+//		 AlarmDbHelper dbHelper = new AlarmDbHelper(getBaseContext());
+//		 SQLiteDatabase db = dbHelper.getReadableDatabase();
+//
+//		// Define a projection that specifies which columns from the database
+//		// you will actually use after this query.
+//		String[] projection = {"id","hh","mm"};
+//
+//		// How you want the results sorted in the resulting Cursor
+//		String sortOrder = "id DESC";
+//
+//		Cursor c = db.query(
+//		    TABLE_NAME,  // The table to query
+//		    projection,  // The columns to return
+//		    "",          // The columns for the WHERE clause
+//		    null, "",          // The values for the WHERE clause
+//		    null,                                     // don't group the rows
+//		    null,                                     // don't filter by row groups
+//		    sortOrder // The sort orderS		    
+//		    );
+//	
+//		c.moveToFirst();
+//		while(c.moveToNext()){
+//			int id = c.getInt(0);
+//			String hh = c.getString(1);
+//			String mm = c.getString(2);
+//			System.out.println(id);
+//			System.out.println(hh);
+//			System.out.println(mm);
+//		}
 
-		Cursor c = db.query(
-		    TABLE_NAME,  // The table to query
-		    projection,  // The columns to return
-		    "",          // The columns for the WHERE clause
-		    null, "",          // The values for the WHERE clause
-		    null,                                     // don't group the rows
-		    null,                                     // don't filter by row groups
-		    sortOrder // The sort orderS		    
-		    );
-	
-		c.moveToFirst();
-		while(c.moveToNext()){
-			int id = c.getInt(0);
-			String hh = c.getString(1);
-			String tt = c.getString(2);
-			
-			//To do something.
-		}
 	} 
 	
 	private void bindingSetting(){
