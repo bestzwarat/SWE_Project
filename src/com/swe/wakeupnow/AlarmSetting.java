@@ -23,16 +23,16 @@ import java.io.*;
 import com.swe.wakeupnow.FeedReaderContract.FeedEntry;
 
 public class AlarmSetting extends Activity {
-
+	
 	private Button mCancel;
 	private Button mSave;
 	private ListView lsvSetting;
 	private TimePicker timeSetting;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.activity_alarm);
 		
 		mCancel = (Button) findViewById(R.id.btcalcel);

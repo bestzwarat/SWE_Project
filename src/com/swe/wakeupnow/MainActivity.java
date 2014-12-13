@@ -23,8 +23,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        
-        
         mCreateAlarm = (Button) findViewById(R.id.create_alarm);
         mCreateAlarm.setOnClickListener(new OnClickListener() {
 			
