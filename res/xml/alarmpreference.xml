@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <Preference android:title="Acts like a button"
+                android:key="button"
+                android:summary="This will act like a button"/>
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="sound"
+        android:summary="Turn the sound on or off"
+        android:title="Sound" />
+
+ <!--     <ListPreference
+        android:defaultValue="null"
+        android:key="ringtone"
+        android:summary=""
+        android:title="Ringtone" />
+    <ListPreference
+        android:defaultValue="null"
+        android:key="game"
+        android:summary=""
+        android:title="Game" />-->
+
+</PreferenceScreen>
