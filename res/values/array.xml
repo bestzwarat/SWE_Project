@@ -10,5 +10,12 @@
  		    <item>@string/record</item>
  		</string-array>
  		
+ 		<string-array name="list_game">
+ 		    <item>@string/game_none</item>>
+ 			<item>@string/game_calculate</item>
+ 			<item>@string/game_matching</item>
+ 			<item>@string/game_maze</item>
+ 		</string-array>
+ 		
 </resources>
 	

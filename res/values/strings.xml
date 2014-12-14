@@ -8,4 +8,11 @@
     <string name="game">Game</string>
     <string name="record">Record</string>
 	<string name="setting_file">setting.txt</string>
+	
+	<string name="ringtone_none">None</string>
+	
+	<string name="game_none">None</string>
+    <string name="game_calculate">Mathematics Game</string>
+    <string name="game_matching">Matching Game</string>
+    <string name="game_maze">Tic Tac Toe Game</string>
 </resources>

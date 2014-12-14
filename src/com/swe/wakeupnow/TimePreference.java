@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 public class TimePreference extends DialogPreference {
     private int lastHour=0;
@@ -24,12 +25,7 @@ public class TimePreference extends DialogPreference {
     }
 
     public TimePreference(Context ctxt, AttributeSet attrs) {
-        this(ctxt, attrs, 0);
-    }
-
-    public TimePreference(Context ctxt, AttributeSet attrs, int defStyle) {
-        super(ctxt, attrs, defStyle);
-
+        super(ctxt, attrs);
         is24HourFormat = DateFormat.is24HourFormat(ctxt);
         setPositiveButtonText("Set");
         setNegativeButtonText("Cancel");
@@ -72,8 +68,9 @@ public class TimePreference extends DialogPreference {
          LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT, 2);
          layout.addView(prefView, lp);
          timeDisplay = new TextView(parent.getContext());
-         timeDisplay.setGravity(Gravity.BOTTOM | Gravity.RIGHT);
+         timeDisplay.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
          timeDisplay.setText(toString());
+         timeDisplay.setTextSize(30);
          LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
          layout.addView(timeDisplay, lp2);
          return layout;
@@ -94,6 +91,7 @@ public class TimePreference extends DialogPreference {
                 persistString(time);
                 timeDisplay.setText(toString());
             }
+			Toast.makeText(getContext(), "Set time to " + toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
