@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getBaseContext(), AlarmSetting.class);
+				Intent i = new Intent(getBaseContext(), AlarmPreference.class);
 				startActivity(i);
 				finish();
 			}

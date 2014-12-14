@@ -12,7 +12,7 @@
     <Button
         android:id="@+id/create_alarm"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:text="@string/create_alarm"
         android:textAlignment="center" />
     

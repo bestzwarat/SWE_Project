@@ -37,13 +37,16 @@
 				android:value="com.swe.wakeupnow.SoundActivity" />
             <category android:name="android.intent.category.DEFAULT"/>
         </activity>
-        <activity android:name="GameActivity">
+        <activity
+            android:name="GameActivity">
             <meta-data
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value="com.swe.wakeupnow.GameActivity" />
             <category android:name="android.intent.category.DEFAULT"/>
         </activity>
-        
+        <activity
+            android:name=".AlarmPreference">
+        </activity>
     </application>
 
 </manifest>
