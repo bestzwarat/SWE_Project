@@ -14,7 +14,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/btcalcel"
+            android:id="@+id/btalarmback"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -31,7 +31,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
-            android:id="@+id/btsave"
+            android:id="@+id/btalarmsave"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

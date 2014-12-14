@@ -15,7 +15,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/btback"
+            android:id="@+id/btsoundback"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -30,6 +30,16 @@
             android:layout_centerVertical="true"
             android:text="Sound"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <Button
+            android:id="@+id/btsoundsave"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Save" />
+        
     </RelativeLayout>
 
     <TextView
@@ -43,32 +53,14 @@
         android:text="Ringtones"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="@dimen/activity_horizontal_margin" >
-        
-        <RadioButton
-            android:id="@+id/radio0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="RadioButton" />
-
-        <RadioButton
-            android:id="@+id/radio1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RadioButton" />
-
-        <RadioButton
-            android:id="@+id/radio2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RadioButton" />
-    </RadioGroup>
+        android:orientation="vertical" >
+    </LinearLayout>
+    
+ 	
 
     <ListView
         android:id="@+id/lvRecord"

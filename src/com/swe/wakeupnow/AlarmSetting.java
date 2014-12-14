@@ -35,8 +35,8 @@ public class AlarmSetting extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_alarm);
 		
-		mCancel = (Button) findViewById(R.id.btcalcel);
-		mSave = (Button) findViewById(R.id.btsave);
+		mCancel = (Button) findViewById(R.id.btalarmback);
+		mSave = (Button) findViewById(R.id.btalarmsave);
 		lsvSetting = (ListView)findViewById(R.id.lsvSetting);
 		timeSetting = (TimePicker)findViewById(R.id.timePicker);
 		
