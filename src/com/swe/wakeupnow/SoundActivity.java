@@ -6,10 +6,13 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -21,17 +24,20 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 public class SoundActivity extends Activity{
-	private Button mbtback;
-	private Button mbtsave;
+	private Button mbtsoundback;
+	private Button mbtsoundsave;
 //	private static Uri[] mUris;
 //	private static String[] mFiles = null;
 //	private RadioButton mRdbt;
 	private LinearLayout mLinearLayout;
-	final String MEDIA_PATH = Environment.getExternalStorageDirectory().getPath() + "/";
-	private ArrayList<HashMap<String, String>> musicList = new ArrayList<HashMap<String, String>>();
-
+	private RadioGroup mRg;
+	private RadioButton[] mRb;
+	private RadioButton selectedRb;
+//	final String MEDIA_PATH = Environment.getExternalStorageDirectory().getPath() + "/";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -40,9 +46,19 @@ public class SoundActivity extends Activity{
 		
 		mLinearLayout = (LinearLayout) findViewById(R.id.linear1);
 		showRdButton();
+//		if(mRg.getCheckedRadioButtonId()!=-1){
+//		    int id= mRg.getCheckedRadioButtonId();
+//		    View radioButton = mRg.findViewById(id);
+//		    int radioId = mRg.indexOfChild(radioButton);
+//		    RadioButton btn = (RadioButton) mRg.getChildAt(radioId);
+//		    String selection = (String) btn.getText();
+//			Toast.makeText(SoundActivity.this, selection, Toast.LENGTH_SHORT).show();
+//
+//		}
+
 		
-		mbtback = (Button) findViewById(R.id.btsoundback);
-		mbtback.setOnClickListener(new OnClickListener() {
+		mbtsoundback = (Button) findViewById(R.id.btsoundback);
+		mbtsoundback.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
@@ -52,11 +68,14 @@ public class SoundActivity extends Activity{
 			}
 		});
 		
-		mbtsave = (Button) findViewById(R.id.btsoundsave);
-		mbtsave.setOnClickListener(new OnClickListener() {
+		mbtsoundsave = (Button) findViewById(R.id.btsoundsave);
+		mbtsoundsave.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				int selectedId = mRg.getCheckedRadioButtonId();
+				selectedRb = (RadioButton) findViewById(selectedId);
+				Toast.makeText(SoundActivity.this, "You choose " + selectedRb.getText(), Toast.LENGTH_SHORT).show();
 				Intent i = new Intent(getBaseContext(), AlarmSetting.class);
 				startActivity(i);
 				finish();
@@ -68,27 +87,20 @@ public class SoundActivity extends Activity{
 //		String music[] = {"Payphone.mp3", "Back to December.flac", "ไม่บอกเธอ.mp3", "a.ogg"};
 //		String[] music = getMusic();
 		String[] music = getMusicFrRaw();
-	
-		// create radio button
-		RadioButton[] rb = new RadioButton[music.length];
-		RadioGroup rg = new RadioGroup(this);
-		rg.setOrientation(RadioGroup.VERTICAL);
-		for (int i = 0; i < music.length; i++) {
-			rb[i] = new RadioButton(this);
-			rg.addView(rb[i]);
-			String nameMusic = music[i].substring(0,1).toUpperCase().concat(music[i].substring(1,music[i].length()));
-			rb[i].setText(nameMusic);
-			rb[i].setOnCheckedChangeListener(new OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					// TODO Auto-generated method stub
-					
-				}
-			});
-		}
-		mLinearLayout.addView(rg);
 		
+		// create radio button
+		mRb = new RadioButton[music.length];
+		mRg = new RadioGroup(this);
+		mRg.setOrientation(RadioGroup.VERTICAL);
+		for (int i = 0; i < music.length; i++) {
+			mRb[i] = new RadioButton(this);
+			mRg.addView(mRb[i]);
+			String nameMusic = music[i].substring(0,1).toUpperCase().concat(music[i].substring(1,music[i].length()));
+			mRb[i].setText(nameMusic);
+		}
+		mLinearLayout.addView(mRg);
+		
+
 	}
 
 //	private String state() {

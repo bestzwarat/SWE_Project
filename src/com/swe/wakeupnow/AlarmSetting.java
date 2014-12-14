@@ -55,6 +55,11 @@ public class AlarmSetting extends Activity {
 				int hh = timeSetting.getCurrentHour();
 				int mm = timeSetting.getCurrentMinute();
 //				saveSetting(hh, mm);
+				
+				
+				Intent i = new Intent(getBaseContext(), MainActivity.class);
+				startActivity(i);
+				finish();
 			}
 		});
 		

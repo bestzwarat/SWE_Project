@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:id="@+id/RelativeLayout1"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
         <Button
@@ -23,54 +23,58 @@
             android:text="Back" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/gamePage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="Games"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+        
+        <Button
+            android:id="@+id/btgamesave"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Save" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <RadioButton
-        android:id="@+id/radioButton1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Off" />
-
-    <RadioButton
-        android:id="@+id/radioButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Math Game" />
-
-    <RadioButton
-        android:id="@+id/radioButton3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Match Game" />
-
-    <RadioButton
-        android:id="@+id/radioButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="Puzzle" />
 
     <RadioGroup
-        android:id="@+id/radioGroup1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:id="@+id/radioGroupGame"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="50dp">
+        
+        <RadioButton
+        	android:id="@+id/rbOff"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_gravity="left"
+        	android:text="Off" />
+
+    	<RadioButton
+        	android:id="@+id/rbMath"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_gravity="left"
+        	android:text="Mathematics Game" />
+
+    	<RadioButton
+        	android:id="@+id/rbMatch"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_gravity="left"
+        	android:text="Matching Game" />
+
+    	<RadioButton
+        	android:id="@+id/rbPuzzle"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_gravity="left"
+        	android:text="Tic Tac Toe" />
     </RadioGroup>
 
 </LinearLayout>

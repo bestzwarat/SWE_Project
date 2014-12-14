@@ -62,12 +62,12 @@
     
  	
 
-    <ListView
+    <!--  <ListView
         android:id="@+id/lvRecord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:entries="@array/list_view2"
  		android:entryValues="@array/list_view2">
-    </ListView>
+    </ListView>-->
 
 </LinearLayout>
