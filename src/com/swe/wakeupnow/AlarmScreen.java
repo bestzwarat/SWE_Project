@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,6 +23,7 @@ public class AlarmScreen extends Activity {
 
 	private WakeLock mWakeLock;
 	private MediaPlayer mPlayer;
+	private Vibrator mVibrate;
 
 	private static final int WAKELOCK_TIMEOUT = 60 * 1000;
 	
@@ -36,6 +38,7 @@ public class AlarmScreen extends Activity {
 		int timeHour = getIntent().getIntExtra(AlarmManagerHelper.TIME_HOUR, 0);
 		int timeMinute = getIntent().getIntExtra(AlarmManagerHelper.TIME_MINUTE, 0);
 		String tone = getIntent().getStringExtra(AlarmManagerHelper.TONE);
+		Boolean vibrate = getIntent().getBooleanExtra(AlarmManagerHelper.VIBRATE, false);
 		
 		TextView tvName = (TextView) findViewById(R.id.alarm_screen_name);
 		tvName.setText(name);
@@ -45,10 +48,11 @@ public class AlarmScreen extends Activity {
 		
 		Button dismissButton = (Button) findViewById(R.id.alarm_screen_button);
 		dismissButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View view) {
 				mPlayer.stop();
+				mVibrate.cancel();
 				finish();
 			}
 		});
@@ -69,6 +73,19 @@ public class AlarmScreen extends Activity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		//Play vibrate
+		mVibrate = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
+		long[] pattern = { 0, 1500, 800};
+		try {
+			if (vibrate == true) {
+				mVibrate.vibrate(pattern, 0);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		
 		//Ensure wakelock release
 		Runnable releaseWakelock = new Runnable() {

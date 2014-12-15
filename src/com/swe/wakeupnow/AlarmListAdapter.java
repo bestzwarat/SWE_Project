@@ -115,7 +115,7 @@ public class AlarmListAdapter extends BaseAdapter {
 		if (isOn) {
 			view.setTextColor(Color.GREEN);
 		} else {
-			view.setTextColor(Color.WHITE);
+			view.setTextColor(Color.DKGRAY);
 		}
 	}
 

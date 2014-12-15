@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,6 +33,7 @@ public class AlarmDetailsActivity extends Activity {
 	private CustomSwitch chkFriday;
 	private CustomSwitch chkSaturday;
 	private TextView txtToneSelection;
+	private CheckBox checkBox;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class AlarmDetailsActivity extends Activity {
 		chkFriday = (CustomSwitch) findViewById(R.id.alarm_details_repeat_friday);
 		chkSaturday = (CustomSwitch) findViewById(R.id.alarm_details_repeat_saturday);
 		txtToneSelection = (TextView) findViewById(R.id.alarm_label_tone_selection);
-		
+		checkBox = (CheckBox) findViewById(R.id.checkbox_vibrate);
 		long id = getIntent().getExtras().getLong("id");
 		
 		if (id == -1) {
@@ -75,8 +78,8 @@ public class AlarmDetailsActivity extends Activity {
 			chkThursday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.THURSDAY));
 			chkFriday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.FRDIAY));
 			chkSaturday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.SATURDAY));
-
 			txtToneSelection.setText(RingtoneManager.getRingtone(this, alarmDetails.alarmTone).getTitle(this));
+			checkBox.setChecked(alarmDetails.vibrate);
 		}
 
 		final LinearLayout ringToneContainer = (LinearLayout) findViewById(R.id.alarm_ringtone_container);
@@ -86,6 +89,25 @@ public class AlarmDetailsActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
 				startActivityForResult(intent , 1);
+			}
+		});
+		
+		final LinearLayout vibrateContainer = (LinearLayout) findViewById(R.id.alarm_vibrate_container);
+		vibrateContainer.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if (v != null) {
+			        checkBox.setChecked(!checkBox.isChecked());
+			        if (checkBox.isChecked()) {
+			        	Vibrator vibrator = ((Vibrator) getSystemService(VIBRATOR_SERVICE));
+			        	vibrator.vibrate(800);
+			        	alarmDetails.vibrate = true;
+			        }
+			        else {
+			        	alarmDetails.vibrate = false;
+			        }
+			    }
 			}
 		});
 	}
