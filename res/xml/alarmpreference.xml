@@ -9,11 +9,15 @@
         	android:summary="Set alarm at"
         	android:title="Time"/>
     	
-    	<Preference
+    	<Preference 
+    	    android:key="ringtone"
+    	    android:summary=""
+    	    android:title="Ringtone" />
+    	
+    	<!--  <com.swe.wakeupnow.RingtonePreference
         	android:key="ringtone"
-        	android:title="Ringtone"
         	android:summary=""
-        	android:defaultValue="None" />
+        	android:title="Ringtone" />-->
     
     	<CheckBoxPreference
         	android:key="vibrate" 

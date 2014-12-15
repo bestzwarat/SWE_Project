@@ -62,7 +62,7 @@ public class SoundActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(getBaseContext(), AlarmSetting.class);
+				Intent i = new Intent(getBaseContext(), AlarmPreference.class);
 				startActivity(i);
 				finish();
 			}
@@ -75,10 +75,18 @@ public class SoundActivity extends Activity{
 			public void onClick(View v) {
 				int selectedId = mRg.getCheckedRadioButtonId();
 				selectedRb = (RadioButton) findViewById(selectedId);
-				Toast.makeText(SoundActivity.this, "You choose " + selectedRb.getText(), Toast.LENGTH_SHORT).show();
-				Intent i = new Intent(getBaseContext(), AlarmSetting.class);
-				startActivity(i);
-				finish();
+				System.out.println(selectedId);
+				if (selectedId == -1) {
+					Toast.makeText(SoundActivity.this, "Please choose one", Toast.LENGTH_SHORT).show();
+					System.out.println(selectedId);
+				}
+				else {
+					Toast.makeText(SoundActivity.this, "You choose " + selectedRb.getText(), Toast.LENGTH_SHORT).show();
+					System.out.println(selectedId);
+					Intent i = new Intent(getBaseContext(), AlarmPreference.class);
+					startActivity(i);
+					finish();
+				}	
 			}
 		});
 	}

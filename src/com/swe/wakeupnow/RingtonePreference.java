@@ -21,6 +21,8 @@ public class RingtonePreference extends DialogPreference {
 	private RadioGroup mRg;
 	private RadioButton[] mRb;
 	private RadioButton selectedRb;
+	private TextView ringtoneDisplay;
+	private LinearLayout mLinearLayout;
 
 	public RingtonePreference(Context ctxt) {
         this(ctxt, null);
@@ -28,12 +30,12 @@ public class RingtonePreference extends DialogPreference {
 
 	public RingtonePreference(Context ctxt, AttributeSet attrs) {
 		super(ctxt, attrs);
-		setPositiveButtonText("Set");
         setNegativeButtonText("Cancel");
 	}
 	
-	@Override
-    protected View onCreateDialogView() {
+	private void showRdButton() {
+//		String music[] = {"Payphone.mp3", "Back to December.flac", "ไม่บอกเธอ.mp3", "a.ogg"};
+//		String[] music = getMusic();
 		String[] music = getMusicFrRaw();
 		
 		// create radio button
@@ -46,83 +48,10 @@ public class RingtonePreference extends DialogPreference {
 			String nameMusic = music[i].substring(0,1).toUpperCase().concat(music[i].substring(1,music[i].length()));
 			mRb[i].setText(nameMusic);
 		}
-        return mRg;
-    }
-
-    @Override
-    protected void onBindDialogView(View v) {
-        super.onBindDialogView(v);
-    }
-
-//    @Override
-//    protected View onCreateView (ViewGroup parent) {
-//         View prefView = super.onCreateView(parent);
-//         LinearLayout layout = new LinearLayout(parent.getContext());
-//         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT, 2);
-//         layout.addView(prefView, lp);
-//         timeDisplay = new TextView(parent.getContext());
-//         timeDisplay.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
-//         timeDisplay.setText(toString());
-//         timeDisplay.setTextSize(30);
-//         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
-//         layout.addView(timeDisplay, lp2);
-//         return layout;
-//    }
-//
-//    @Override
-//    protected void onDialogClosed(boolean positiveResult) {
-//        super.onDialogClosed(positiveResult);
-//
-//        if (positiveResult) {
-//            picker.clearFocus();
-//            lastHour=picker.getCurrentHour();
-//            lastMinute=picker.getCurrentMinute();
-//
-//            String time=String.valueOf(lastHour)+":"+String.valueOf(lastMinute);
-//
-//            if (callChangeListener(time)) {
-//                persistString(time);
-//                timeDisplay.setText(toString());
-//            }
-//			Toast.makeText(getContext(), "Set time to " + toString(), Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    @Override
-//    protected Object onGetDefaultValue(TypedArray a, int index) {
-//        return(a.getString(index));
-//    }
-//
-//    @Override
-//    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-//        String time=null;
-//
-//        if (restoreValue) {
-//            if (defaultValue==null) {
-//                time=getPersistedString("00:00");
-//            }
-//            else {
-//                time=getPersistedString(defaultValue.toString());
-//            }
-//        }
-//        else {
-//            if (defaultValue==null) {
-//                time="00:00";
-//            }
-//            else {
-//                time=defaultValue.toString();
-//            }
-//            if (shouldPersist()) {
-//                persistString(time);
-//            }
-//        }
-//
-//        String[] timeParts=time.split(":");
-//        lastHour=Integer.parseInt(timeParts[0]);
-//        lastMinute=Integer.parseInt(timeParts[1]);;
-//    }
-//
-    private String[] getMusicFrRaw() {
+		mLinearLayout.addView(mRg);
+	}
+	
+	private String[] getMusicFrRaw() {
 		Field[] fields = R.raw.class.getFields();
 		String[] music = new String[fields.length];
 		System.out.println(music.length);
@@ -132,4 +61,84 @@ public class RingtonePreference extends DialogPreference {
 		}
 		return music;
 	}
+	
+	@Override
+    protected View onCreateDialogView() {	
+		mLinearLayout = new LinearLayout(getContext().getApplicationContext());
+		mRg=new RadioGroup(getContext().getApplicationContext());
+        return(mRg);
+    }
+
+    @Override
+    protected void onBindDialogView(View v) {
+    	super.onBindDialogView(v);
+    	showRdButton();
+    }
+
+//    @Override
+//    protected View onCreateView (ViewGroup parent) {
+//         View prefView = super.onCreateView(parent);
+//         LinearLayout mLinearLayout = new LinearLayout(parent.getContext());
+//         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT, 2);
+//         mLinearLayout.addView(prefView, lp);
+////         ringtoneDisplay = new TextView(parent.getContext());
+////         ringtoneDisplay.setGravity(Gravity.CENTER | Gravity.CENTER_VERTICAL);
+////         ringtoneDisplay.setText(toString());
+////         ringtoneDisplay.setTextSize(30);
+////         LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT, 1);
+////         layout.addView(ringtoneDisplay, lp2);
+//         return mLinearLayout;
+//    }
+
+    @Override
+    protected void onDialogClosed(boolean positiveResult) {
+        super.onDialogClosed(positiveResult);
+
+//        if (positiveResult) {
+//            picker.clearFocus();
+//            lastHour=picker.getCurrentHour();
+//            lastMinute=picker.getCurrentMinute();
+//
+//            String ringtone=String.valueOf(lastHour)+":"+String.valueOf(lastMinute);
+//
+//            if (callChangeListener(ringtone)) {
+//                persistString(ringtone);
+//                ringtoneDisplay.setText(toString());
+//            }
+//			Toast.makeText(getContext(), "Choose" + toString(), Toast.LENGTH_SHORT).show();
+//        }
+    }
+
+//    @Override
+//    protected Object onGetDefaultValue(TypedArray a, int index) {
+//        return(a.getString(index));
+//    }
+//
+//    @Override
+//    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+//        String ringtone=null;
+//
+//        if (restoreValue) {
+//            if (defaultValue==null) {
+//            	ringtone=getPersistedString("None");
+//            }
+//            else {
+//            	ringtone=getPersistedString(defaultValue.toString());
+//            }
+//        }
+//        else {
+//            if (defaultValue==null) {
+//            	ringtone="None";
+//            }
+//            else {
+//            	ringtone=defaultValue.toString();
+//            }
+//            if (shouldPersist()) {
+//                persistString(ringtone);
+//            }
+//        }
+//
+//    }
+
+    
 }

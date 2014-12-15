@@ -1,42 +1,132 @@
 package com.swe.wakeupnow;
 
-import com.swe.wakeupnow.FeedReaderContract.FeedEntry;
+import java.util.ArrayList;
+import java.util.List;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
-public class AlarmDbHelper extends SQLiteOpenHelper {
+import com.swe.wakeupnow.AlarmContract.Alarm;
+
+public class AlarmDBHelper extends SQLiteOpenHelper {
+
+	public static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "alarmclock.db";
 	
-	private static final String TEXT_TYPE = " TEXT";
-	private static final String COMMA_SEP = ",";
-	private static final String SQL_CREATE_ENTRIES =
-	    "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
-	    FeedEntry._ID + " INTEGER PRIMARY KEY," +
-	    FeedEntry.COLUMN_NAME_HOUR + TEXT_TYPE + COMMA_SEP +
-	    FeedEntry.COLUMN_NAME_MINUTE + TEXT_TYPE +
+	private static final String SQL_CREATE_ALARM = "CREATE TABLE " + Alarm.TABLE_NAME + " (" +
+			Alarm._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+			Alarm.COLUMN_NAME_ALARM_NAME + " TEXT," +
+			Alarm.COLUMN_NAME_ALARM_TIME_HOUR + " INTEGER," +
+			Alarm.COLUMN_NAME_ALARM_TIME_MINUTE + " INTEGER," +
+			Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS + " TEXT," +
+			Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY + " BOOLEAN," +
+			Alarm.COLUMN_NAME_ALARM_TONE + " TEXT," +
+			Alarm.COLUMN_NAME_ALARM_ENABLED + " BOOLEAN" +
 	    " )";
-	private static final String SQL_DELETE_ENTRIES =
-	    "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 	
-    // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "alarm.db";
+	private static final String SQL_DELETE_ALARM =
+		    "DROP TABLE IF EXISTS " + Alarm.TABLE_NAME;
     
-    public AlarmDbHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-    public void onCreate(SQLiteDatabase db) {
-//    	String sql = "CREATE TABLE t_alarm (id  INTEGER PRIMARY KEY,hh VARCHAR(6),mm VARCHAR(6));";
-        db.execSQL(SQL_CREATE_ENTRIES);
-    }
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // This database is only a cache for online data, so its upgrade policy is
-        // to simply to discard the data and start over //
-        db.execSQL(SQL_DELETE_ENTRIES);
+	public AlarmDBHelper(Context context) {
+		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	}
+
+	@Override
+	public void onCreate(SQLiteDatabase db) {
+		db.execSQL(SQL_CREATE_ALARM);
+	}
+
+	@Override
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		db.execSQL(SQL_DELETE_ALARM);
         onCreate(db);
-    }
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onUpgrade(db, oldVersion, newVersion);
-    }
+	}
+	
+	private AlarmModel populateModel(Cursor c) {
+		AlarmModel model = new AlarmModel();
+		model.id = c.getLong(c.getColumnIndex(Alarm._ID));
+		model.name = c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_NAME));
+		model.timeHour = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TIME_HOUR));
+		model.timeMinute = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TIME_MINUTE));
+		model.repeatWeekly = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY)) == 0 ? false : true;
+		model.alarmTone = c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TONE)) != "" ? Uri.parse(c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TONE))) : null;
+		model.isEnabled = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_ENABLED)) == 0 ? false : true;
+		
+		String[] repeatingDays = c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS)).split(",");
+		for (int i = 0; i < repeatingDays.length; ++i) {
+			model.setRepeatingDay(i, repeatingDays[i].equals("false") ? false : true);
+		}
+		
+		return model;
+	}
+	
+	private ContentValues populateContent(AlarmModel model) {
+		ContentValues values = new ContentValues();
+        values.put(Alarm.COLUMN_NAME_ALARM_NAME, model.name);
+        values.put(Alarm.COLUMN_NAME_ALARM_TIME_HOUR, model.timeHour);
+        values.put(Alarm.COLUMN_NAME_ALARM_TIME_MINUTE, model.timeMinute);
+        values.put(Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY, model.repeatWeekly);
+        values.put(Alarm.COLUMN_NAME_ALARM_TONE, model.alarmTone != null ? model.alarmTone.toString() : "");
+        values.put(Alarm.COLUMN_NAME_ALARM_ENABLED, model.isEnabled);
+        
+        String repeatingDays = "";
+        for (int i = 0; i < 7; ++i) {
+        	repeatingDays += model.getRepeatingDay(i) + ",";
+        }
+        values.put(Alarm.COLUMN_NAME_ALARM_REPEAT_DAYS, repeatingDays);
+        
+        return values;
+	}
+	
+	public long createAlarm(AlarmModel model) {
+		ContentValues values = populateContent(model);
+        return getWritableDatabase().insert(Alarm.TABLE_NAME, null, values);
+	}
+	
+	public long updateAlarm(AlarmModel model) {
+		ContentValues values = populateContent(model);
+        return getWritableDatabase().update(Alarm.TABLE_NAME, values, Alarm._ID + " = ?", new String[] { String.valueOf(model.id) });
+	}
+	
+	public AlarmModel getAlarm(long id) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+        String select = "SELECT * FROM " + Alarm.TABLE_NAME + " WHERE " + Alarm._ID + " = " + id;
+		
+		Cursor c = db.rawQuery(select, null);
+		
+		if (c.moveToNext()) {
+			return populateModel(c);
+		}
+		
+		return null;
+	}
+	
+	public List<AlarmModel> getAlarms() {
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+        String select = "SELECT * FROM " + Alarm.TABLE_NAME;
+		
+		Cursor c = db.rawQuery(select, null);
+		
+		List<AlarmModel> alarmList = new ArrayList<AlarmModel>();
+		
+		while (c.moveToNext()) {
+			alarmList.add(populateModel(c));
+		}
+		
+		if (!alarmList.isEmpty()) {
+			return alarmList;
+		}
+		
+		return null;
+	}
+	
+	public int deleteAlarm(long id) {
+		return getWritableDatabase().delete(Alarm.TABLE_NAME, Alarm._ID + " = ?", new String[] { String.valueOf(id) });
+	}
 }

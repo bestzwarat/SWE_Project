@@ -88,7 +88,7 @@ public class AlarmSetting extends Activity {
 	}
 	
 	private void saveSetting(int hh,int mm){
-		 AlarmDbHelper dbHelper = new AlarmDbHelper(getBaseContext());
+		 AlarmDBHelper dbHelper = new AlarmDBHelper(getBaseContext());
 		
 		// Gets the data repository in write mode
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
