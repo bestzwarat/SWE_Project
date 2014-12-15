@@ -58,9 +58,7 @@
 				android:value="com.swe.wakeupnow.GameActivity" />
             <category android:name="android.intent.category.DEFAULT"/>
         </activity>
-        <activity
-            android:name=".AlarmPreference">
-        </activity>
+        <activity android:name=".AlarmPreference" />
         
         <activity android:name=".AlarmScreen" />
         

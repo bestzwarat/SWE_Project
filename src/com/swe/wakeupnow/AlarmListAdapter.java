@@ -86,26 +86,26 @@ public class AlarmListAdapter extends BaseAdapter {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//				((MainActivity) mContext).setAlarmEnabled(((Long) buttonView.getTag()).longValue(), isChecked);
+				((MainActivity) mContext).setAlarmEnabled(((Long) buttonView.getTag()).longValue(), isChecked);
 			}
-//		});
-//		
-//		view.setTag(Long.valueOf(model.id));
-//		view.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View view) {
-//				((MainActivity) mContext).startAlarmDetailsActivity(((Long) view.getTag()).longValue());
-//			}
-//		});
-//		
-//		view.setOnLongClickListener(new OnLongClickListener() {
-//			
-//			@Override
-//			public boolean onLongClick(View view) {
-//				((MainActivity) mContext).deleteAlarm(((Long) view.getTag()).longValue());
-//				return true;
-//			}
+		});
+		
+		view.setTag(Long.valueOf(model.id));
+		view.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				((MainActivity) mContext).startAlarmDetailsActivity(((Long) view.getTag()).longValue());
+			}
+		});
+		
+		view.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View view) {
+				((MainActivity) mContext).deleteAlarm(((Long) view.getTag()).longValue());
+				return true;
+			}
 		});
 		
 		return view;
@@ -115,7 +115,7 @@ public class AlarmListAdapter extends BaseAdapter {
 		if (isOn) {
 			view.setTextColor(Color.GREEN);
 		} else {
-			view.setTextColor(Color.BLACK);
+			view.setTextColor(Color.WHITE);
 		}
 	}
 
