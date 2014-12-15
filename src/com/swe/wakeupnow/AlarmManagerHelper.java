@@ -18,6 +18,7 @@ public class AlarmManagerHelper extends BroadcastReceiver {
 	public static final String TIME_MINUTE = "timeMinute";
 	public static final String TONE = "alarmTone";
 	public static final String VIBRATE = "vibrate";
+	public static final String GAME = "game";
 	
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -112,6 +113,7 @@ public class AlarmManagerHelper extends BroadcastReceiver {
 		intent.putExtra(TIME_MINUTE, model.timeMinute);
 		intent.putExtra(TONE, model.alarmTone.toString());
 		intent.putExtra(VIBRATE, model.vibrate);
+		intent.putExtra(GAME, model.game);
 		
 		return PendingIntent.getService(context, (int) model.id, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 	}

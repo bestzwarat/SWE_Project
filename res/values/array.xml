@@ -12,9 +12,9 @@
  		
  		<string-array name="list_game">
  		    <item>@string/game_none</item>>
- 			<item>@string/game_calculate</item>
- 			<item>@string/game_matching</item>
- 			<item>@string/game_maze</item>
+ 			<item>@string/game_math</item>
+ 			<item>@string/game_match</item>
+ 			<item>@string/game_ttt</item>
  		</string-array>
  		
 </resources>

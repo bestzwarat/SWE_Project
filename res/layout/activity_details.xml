@@ -212,6 +212,38 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/alarm_vibrate_container" />
         
+        <LinearLayout
+            android:id="@+id/alarm_game_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/divider5"
+            android:background="@drawable/view_touch_selector"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/alarm_label_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/details_alarm_game"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/alarm_label_game_selection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:text="@string/details_alarm_game_default"
+                android:textSize="14sp" />
+        </LinearLayout>
+        
+        <View
+            android:id="@+id/divider6"
+            style="@style/Divider"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/alarm_game_container" />
+        
     </RelativeLayout>
 
 </ScrollView>

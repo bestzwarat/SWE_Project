@@ -20,6 +20,7 @@ public class AlarmModel {
 	public Uri alarmTone;
 	public String name;
 	public boolean vibrate;
+	public String game;
 	public boolean isEnabled;
 	
 	public AlarmModel() {

@@ -1,6 +1,8 @@
 package com.swe.wakeupnow;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Bundle;
@@ -34,6 +36,8 @@ public class AlarmDetailsActivity extends Activity {
 	private CustomSwitch chkSaturday;
 	private TextView txtToneSelection;
 	private CheckBox checkBox;
+	private TextView txtGameSelection;
+	private AlertDialog gameDialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +62,7 @@ public class AlarmDetailsActivity extends Activity {
 		chkSaturday = (CustomSwitch) findViewById(R.id.alarm_details_repeat_saturday);
 		txtToneSelection = (TextView) findViewById(R.id.alarm_label_tone_selection);
 		checkBox = (CheckBox) findViewById(R.id.checkbox_vibrate);
+		txtGameSelection = (TextView) findViewById(R.id.alarm_label_game_selection);
 		long id = getIntent().getExtras().getLong("id");
 		
 		if (id == -1) {
@@ -79,6 +84,7 @@ public class AlarmDetailsActivity extends Activity {
 			chkFriday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.FRDIAY));
 			chkSaturday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.SATURDAY));
 			txtToneSelection.setText(RingtoneManager.getRingtone(this, alarmDetails.alarmTone).getTitle(this));
+			txtGameSelection.setText(alarmDetails.game);
 			checkBox.setChecked(alarmDetails.vibrate);
 		}
 
@@ -108,6 +114,15 @@ public class AlarmDetailsActivity extends Activity {
 			        	alarmDetails.vibrate = false;
 			        }
 			    }
+			}
+		});
+		
+		final LinearLayout gameContainer = (LinearLayout) findViewById(R.id.alarm_game_container);
+		gameContainer.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				createGameDialog();
 			}
 		});
 	}
@@ -178,6 +193,42 @@ public class AlarmDetailsActivity extends Activity {
 		alarmDetails.setRepeatingDay(AlarmModel.FRDIAY, chkFriday.isChecked());
 		alarmDetails.setRepeatingDay(AlarmModel.SATURDAY, chkSaturday.isChecked());
 		alarmDetails.isEnabled = true;
+	}
+	
+	private void createGameDialog() {
+		final CharSequence[] items = {"None","Mathematics Game","Matching Game","Tic Tac Toe Game"};
+
+        // Creating and Building the Dialog 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select The Difficulty Level");
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+           
+            
+            switch(item)
+            {
+                case 0:
+                	txtGameSelection.setText(R.string.game_none);
+                	alarmDetails.game = "None";
+                    break;
+                case 1:
+                	txtGameSelection.setText(R.string.game_math);
+                	alarmDetails.game = "Mathematics Game";
+                    break;
+                case 2:
+                	txtGameSelection.setText(R.string.game_match);
+                	alarmDetails.game = "Matching Game";
+                    break;
+                case 3:
+                	txtGameSelection.setText(R.string.game_ttt);
+                	alarmDetails.game = "Tic Tac Toe Game";
+                    break;
+            }
+            gameDialog.dismiss();
+            }
+        });
+        gameDialog = builder.create();
+        gameDialog.show();
 	}
 	
 }

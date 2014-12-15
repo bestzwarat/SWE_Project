@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AlarmScreen extends Activity {
 	
@@ -39,6 +40,9 @@ public class AlarmScreen extends Activity {
 		int timeMinute = getIntent().getIntExtra(AlarmManagerHelper.TIME_MINUTE, 0);
 		String tone = getIntent().getStringExtra(AlarmManagerHelper.TONE);
 		Boolean vibrate = getIntent().getBooleanExtra(AlarmManagerHelper.VIBRATE, false);
+		String game = getIntent().getStringExtra(AlarmManagerHelper.GAME);
+		
+		Toast.makeText(this, game, Toast.LENGTH_LONG).show();
 		
 		TextView tvName = (TextView) findViewById(R.id.alarm_screen_name);
 		tvName.setText(name);

@@ -26,6 +26,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
 			Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY + " BOOLEAN," +
 			Alarm.COLUMN_NAME_ALARM_TONE + " TEXT," +
 			Alarm.COLUMN_NAME_ALARM_VIBRATE + " BOOLEAN," +
+			Alarm.COLUMN_NAME_ALARM_GAME + " TEXT," +
 			Alarm.COLUMN_NAME_ALARM_ENABLED + " BOOLEAN" +
 	    " )";
 	
@@ -56,6 +57,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
 		model.repeatWeekly = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY)) == 0 ? false : true;
 		model.alarmTone = c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TONE)) != "" ? Uri.parse(c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_TONE))) : null;
 		model.vibrate = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_VIBRATE)) == 0 ? false : true;
+		model.game = c.getString(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_GAME));
 		model.isEnabled = c.getInt(c.getColumnIndex(Alarm.COLUMN_NAME_ALARM_ENABLED)) == 0 ? false : true;
 
 		
@@ -75,6 +77,7 @@ public class AlarmDBHelper extends SQLiteOpenHelper {
         values.put(Alarm.COLUMN_NAME_ALARM_REPEAT_WEEKLY, model.repeatWeekly);
         values.put(Alarm.COLUMN_NAME_ALARM_TONE, model.alarmTone != null ? model.alarmTone.toString() : "");
         values.put(Alarm.COLUMN_NAME_ALARM_VIBRATE, model.vibrate);
+        values.put(Alarm.COLUMN_NAME_ALARM_GAME, model.game);
         values.put(Alarm.COLUMN_NAME_ALARM_ENABLED, model.isEnabled);
         
         String repeatingDays = "";
