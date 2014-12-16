@@ -36,31 +36,7 @@
             android:name="MainActivity"
             android:label="@string/app_name" >
         </activity>
-        
-        <activity 
-            android:name="AlarmSetting">
-            <meta-data
-				android:name="android.support.PARENT_ACTIVITY"
-				android:value="com.swe.wakeupnow.AlarmSetting" />
-            <category android:name="android.intent.category.DEFAULT"/>
-        </activity>
-        <activity 
-            android:name="SoundActivity">
-            <meta-data
-				android:name="android.support.PARENT_ACTIVITY"
-				android:value="com.swe.wakeupnow.SoundActivity" />
-            <category android:name="android.intent.category.DEFAULT"/>
-        </activity>
-        <activity
-            android:name="GameActivity">
-            <meta-data
-				android:name="android.support.PARENT_ACTIVITY"
-				android:value="com.swe.wakeupnow.GameActivity" />
-            <category android:name="android.intent.category.DEFAULT"/>
-        </activity>
-        
-        <activity android:name=".AlarmPreference" />
-        
+
         <activity
             android:name=".AlarmScreen"
             android:theme="@android:style/Theme.NoTitleBar" >

@@ -177,14 +177,56 @@ public class AlarmScreen extends Activity {
 		int hour = c.get(Calendar.HOUR);
 		int minute = c.get(Calendar.MINUTE);
 		int second = c.get(Calendar.SECOND);
-		String format;
-		if (form > 12) {
-			format = "PM";
+//		String format;
+//		if (form > 12) {
+//			format = "PM";
+//		}
+//		else {
+//			format = "AM";
+//		}
+//		builder.setMessage("Current time is  " + String.valueOf(hour) + " : " + String.valueOf(minute) + " : " + String.valueOf(second) + " " + format);
+		int alarmH = timeHour;
+		int alarmM = timeMinute;
+		int alarmS = 0;
+		int avgH = form - alarmH;
+		int avgM = minute - alarmM;
+		int avgS = second - alarmS;
+		String quote = "You stop alarm late for ";
+		String sec;
+		String min;
+		String ho;
+		
+		if (avgS == 1 || avgS == 0) {
+			sec = String.valueOf(avgS) + " second";
 		}
 		else {
-			format = "AM";
+			sec = String.valueOf(avgS) + " seconds";
 		}
-		builder.setMessage("Current time is  " + String.valueOf(hour) + " : " + String.valueOf(minute) + " : " + String.valueOf(second) + " " + format);
+		if (avgM == 1 || avgM == 0) {
+			min = String.valueOf(avgM) + " minute ";
+		}
+		else {
+			min = String.valueOf(avgM) + " minutes ";
+		}
+		if (avgH == 1) {
+			ho = String.valueOf(avgM) + " hour ";
+		}
+		else {
+			ho = String.valueOf(avgM) + " hours ";
+		}
+		
+		if (avgH == 0) {
+			if (avgM == 0) {
+				builder.setMessage(quote + sec);
+			}
+			else {
+				builder.setMessage(quote + min + sec);
+			}
+		}
+		else {
+			builder.setMessage(quote + ho + min +sec);
+		}
+		
 		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
