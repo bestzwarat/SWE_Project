@@ -53,11 +53,10 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <activity
-            android:name="TestGameActivity"
-            android:theme="@android:style/Theme.NoTitleBar">
+        <activity android:name="TestGameActivity">
         </activity>
         <activity android:name="TicTacToeActivity"></activity>
+        <activity android:name="MathGameActivity"></activity>
     </application>
 
 </manifest>

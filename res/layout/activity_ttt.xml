@@ -6,7 +6,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/bgapp"
     tools:context="com.swe.wakeupnow.TicTacToeActivity" >
+
 <com.swe.wakeupnow.BoardView
 	android:id="@+id/board"
 	android:layout_width="300dp"
@@ -20,10 +22,12 @@
      android:layout_height="wrap_content"
      android:layout_alignLeft="@+id/board"
      android:layout_below="@+id/board"
-     android:layout_marginTop="28dp"
+     android:layout_marginTop="40dp"
      android:gravity="center_horizontal"
      android:text="info"
-     android:textSize="20dp" />
+     android:textColor="@android:color/white"
+     android:textAlignment="center"
+     android:textSize="30dp" />
  
 
 </RelativeLayout>

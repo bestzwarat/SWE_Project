@@ -39,6 +39,7 @@
             android:layout_below="@+id/alarm_details_time_picker"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:textColorHint="@android:color/white"
             android:ems="10"
             android:hint="@string/details_alarm_name" />
 

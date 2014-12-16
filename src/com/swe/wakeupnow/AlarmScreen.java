@@ -73,7 +73,6 @@ public class AlarmScreen extends Activity {
 				}
 				else {
 					System.out.println(game);
-					
 					stopMediaOrVibrate();
 					createDismissDialog2();
 				}
@@ -187,7 +186,12 @@ public class AlarmScreen extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				if (game.equals("Tic Tac Toe Game")){
-					Intent i = new Intent(AlarmScreen.this, TestGameActivity.class);
+					Intent i = new Intent(AlarmScreen.this, TicTacToeActivity.class);
+					startActivity(i);
+					finish();
+				}
+				else if (game.equals("Mathematics Game")){
+					Intent i = new Intent(AlarmScreen.this, MathGameActivity.class);
 					startActivity(i);
 					finish();
 				}
