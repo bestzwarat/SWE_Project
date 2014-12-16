@@ -53,7 +53,7 @@ public class AlarmScreen extends Activity {
 		vibrate = getIntent().getBooleanExtra(AlarmManagerHelper.VIBRATE, false);
 		game = getIntent().getStringExtra(AlarmManagerHelper.GAME);
 		
-		Toast.makeText(this, game, Toast.LENGTH_LONG).show();
+//		Toast.makeText(this, game, Toast.LENGTH_LONG).show();
 		
 		TextView tvName = (TextView) findViewById(R.id.alarm_screen_name);
 		tvName.setText(name);
@@ -185,13 +185,19 @@ public class AlarmScreen extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				if (game.equals("Tic Tac Toe Game")){
-					Intent i = new Intent(AlarmScreen.this, TicTacToeActivity.class);
+				System.out.println(game);
+				if (game.equals("Matching Game")){
+					Intent i = new Intent(AlarmScreen.this, MatchGameActivity.class);
 					startActivity(i);
 					finish();
 				}
 				else if (game.equals("Mathematics Game")){
 					Intent i = new Intent(AlarmScreen.this, MathGameActivity.class);
+					startActivity(i);
+					finish();
+				}
+				else {
+					Intent i = new Intent(AlarmScreen.this, TicTacToeActivity.class);
 					startActivity(i);
 					finish();
 				}

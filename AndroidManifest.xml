@@ -57,6 +57,7 @@
         </activity>
         <activity android:name="TicTacToeActivity"></activity>
         <activity android:name="MathGameActivity"></activity>
+        <activity android:name="MatchGameActivity"></activity>
     </application>
 
 </manifest>
