@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/bgalarm" >
 
     <TextView
         android:id="@+id/alarm_screen_title"
@@ -11,8 +12,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:text="@string/alarmscreen_title"
-        android:textSize="38sp"
-        android:textColor="@android:color/holo_red_dark" />
+        android:textSize="50sp"
+        android:textColor="@android:color/black" />
 
     <TextView
         android:id="@+id/alarm_screen_time"
@@ -20,10 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/alarm_screen_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="30dp"
         android:text="@string/alarmscreen_time"
-        android:textSize="60sp"
-        android:textColor="@android:color/holo_red_dark" />
+        android:textSize="100sp"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/alarm_screen_name"
@@ -31,8 +32,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/alarm_screen_time"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:text="@string/alarmscreen_name" />
+        android:layout_marginTop="30dp"
+        android:text="@string/alarmscreen_name"
+        android:textSize="30sp"
+        android:textColor="@android:color/white" />
     
     <Button
         android:id="@+id/alarm_screen_button"
@@ -40,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/holo_red_light"
+        android:background="@android:color/holo_red_dark"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
         android:paddingLeft="10dp"

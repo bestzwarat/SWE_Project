@@ -16,6 +16,9 @@
     <string name="game_match">Matching Game</string>
     <string name="game_ttt">Tic Tac Toe Game</string>
     
+    <string name="alert_ringtone">Please choose alarm tone</string>
+    <string name="alert_game">Please choose game</string>
+    
     <string name="details_alarm_name">Set your alarm name</string>
     <string name="details_repeat_weekly">Repeat Weekly</string>
 	<string name="details_sunday">Sunday</string>
