@@ -4,16 +4,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/bgalarm" >
 
-    <TextView
+    <ImageView
         android:id="@+id/alarm_screen_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:text="@string/alarmscreen_title"
-        android:textSize="50sp"
-        android:textColor="@android:color/black" />
+        android:layout_marginTop="20dp"
+       	android:src="@drawable/alarm_label" />
 
     <TextView
         android:id="@+id/alarm_screen_time"
@@ -21,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/alarm_screen_title"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/alarmscreen_time"
         android:textSize="100sp"
         android:textColor="@android:color/white" />
@@ -39,16 +37,13 @@
     
     <Button
         android:id="@+id/alarm_screen_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@android:color/holo_red_dark"
         android:paddingTop="25dp"
         android:paddingBottom="25dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:layout_marginBottom="106dp"
         android:text="@string/alarmscreen_bttext"
         android:textSize="38sp"
         android:textColor="@android:color/white" />
