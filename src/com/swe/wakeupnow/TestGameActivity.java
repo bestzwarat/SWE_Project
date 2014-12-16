@@ -23,8 +23,7 @@ public class TestGameActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-//				alarmScreen.getmPlayer().stop();
-//				alarmScreen.getmVibrate().cancel();
+//				alarmScreen.stopMediaOrVibrate();
 				finish();
 			}
 		});
