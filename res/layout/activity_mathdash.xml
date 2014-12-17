@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@drawable/bgapp" >
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -12,7 +13,6 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:background="@android:color/darker_gray"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="5dp" >
@@ -35,7 +35,8 @@
                 android:id="@+id/gameSolved"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="0/10" />
         </LinearLayout>
 
 
@@ -48,29 +49,53 @@
         android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_weight="1"
-        android:background="@android:color/darker_gray"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="70sp" />
+        android:textSize="70sp"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/gameButton1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/cream"
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/gameButton2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/cream"
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/gameButton3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/cream"
+        android:textColor="@android:color/black" />
 
     <Button
         android:id="@+id/gameButton4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/cream"
+        android:textColor="@android:color/black" />
 
 </LinearLayout>

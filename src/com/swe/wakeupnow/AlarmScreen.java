@@ -3,9 +3,11 @@ package com.swe.wakeupnow;
 import java.util.Calendar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -20,7 +22,7 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 public class AlarmScreen extends Activity {
 	
@@ -35,7 +37,7 @@ public class AlarmScreen extends Activity {
 	private String tone;
 	private Boolean vibrate;
 	private String game;
-
+	private long[] pattern = { 0, 1500, 800};
 
 	private static final int WAKELOCK_TIMEOUT = 60 * 1000;
 	
@@ -68,12 +70,13 @@ public class AlarmScreen extends Activity {
 			public void onClick(View view) {
 				if (game.equals("None")) {
 					System.out.println("None");
-					stopMediaOrVibrate();
+					stopMedia();
+					stopVibrate();
 					createDismissDialog();
 				}
 				else {
 					System.out.println(game);
-					stopMediaOrVibrate();
+//					stopMediaOrVibrate();
 					createDismissDialog2();
 				}
 				
@@ -99,7 +102,6 @@ public class AlarmScreen extends Activity {
 		
 		//Play vibrate
 		mVibrate = (Vibrator) this.getSystemService(VIBRATOR_SERVICE);
-		long[] pattern = { 0, 1500, 800};
 		try {
 			if (vibrate == true) {
 				mVibrate.vibrate(pattern, 0);
@@ -134,6 +136,8 @@ public class AlarmScreen extends Activity {
 	protected void onResume() {
 		super.onResume();
 
+		mVibrate.vibrate(pattern, 0);
+		
 		// Set the window to keep screen on
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -186,21 +190,55 @@ public class AlarmScreen extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				System.out.println(game);
-				if (game.equals("Matching Game")){
-					Intent i = new Intent(AlarmScreen.this, MatchGameActivity.class);
-					startActivity(i);
-					finish();
+				if (game.equals("Calculation Game")){
+					Intent intent = new Intent(AlarmScreen.this, MathDashActivity.class);
+    				startActivityForResult(intent , 1);
 				}
-				else if (game.equals("Mathematics Game")){
-					Intent i = new Intent(AlarmScreen.this, MathDashActivity.class);
-					startActivity(i);
-					finish();
+				else if (game.equals("Picture Pair Game")){
+					Intent intent = new Intent(AlarmScreen.this, MatchGameActivity.class);
+    				startActivityForResult(intent , 2);
 				}
 				else {
-					Intent i = new Intent(AlarmScreen.this, TicTacToeActivity.class);
-					startActivity(i);
-					finish();
+					Intent intent = new Intent(AlarmScreen.this, TicTacToeActivity.class);
+    				startActivityForResult(intent , 3);
 				}
+			}
+		});
+		builder.create().show();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == 1) {
+			if (resultCode == RESULT_OK) {
+				createWinDialog();
+		    }
+		}
+		if (requestCode == 2) {
+			if (resultCode == RESULT_OK) {
+				createWinDialog();
+			}
+		}
+		if (requestCode == 3) {
+			if (resultCode == RESULT_OK) {
+				createWinDialog();
+			}
+		}
+	}
+	
+	private void createWinDialog() {
+		System.out.println("Dialog create");
+		AlertDialog.Builder builder  = new AlertDialog.Builder(this);
+		builder.setTitle("Yeah!!!");
+		builder.setMessage("You win a game");
+		builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				stopMedia();
+				stopVibrate();
+				dialog.dismiss();
+				finish();
 			}
 		});
 		builder.create().show();
@@ -256,9 +294,20 @@ public class AlarmScreen extends Activity {
 		return message;
 	}
 	
-	public void stopMediaOrVibrate() {
+	private void stopMedia() {
 		mPlayer.stop();
-		mVibrate.cancel();
+		mPlayer.release();
+	}
+	
+	private void stopVibrate(){
+		if (vibrate == true) {
+			mVibrate.cancel();
+		}
+	}
+	
+	@Override
+	public void onBackPressed() {
+	       // Do nothing
 	}
 	
 }

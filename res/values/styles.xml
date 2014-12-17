@@ -22,7 +22,17 @@
 	<style name="Divider">
 		<item name="android:layout_width">match_parent</item>
 		<item name="android:layout_height">1dp</item>
-		<item name="android:background">?android:attr/listDivider</item>
+		<item name="android:background">@android:color/darker_gray</item>
 	</style>
-
+	
+	<color name="pink">#FFDDDD</color>
+    <color name="yellow">#FFFF88</color>
+    <color name="blue">#cadcf3</color>
+    <color name="gray">#919191</color>
+    <color name="orose">#fdd1a4</color>
+    <color name="seablue">#34d3a7</color>
+    <color name="cream">#fce084</color>
+	<color name="dkgray">#636363</color>
+    
+    
 </resources>

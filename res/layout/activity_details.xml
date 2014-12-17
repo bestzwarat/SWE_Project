@@ -31,15 +31,26 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+        
+        <TextView
+            android:id="@+id/alarm_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/alarm_details_name"
+            android:layout_below="@+id/alarm_details_time_picker"
+            android:text="@string/details_name_label"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
 
         <EditText
             android:id="@+id/alarm_details_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/alarm_details_time_picker"
+            android:layout_toRightOf="@+id/alarm_name"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:textColorHint="@android:color/white"
+            android:textColorHint="@android:color/darker_gray"
             android:ems="10"
             android:hint="@string/details_alarm_name" />
 
@@ -155,7 +166,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="5sp"
                 android:text="@string/details_alarm_tone"
+                android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <TextView
@@ -163,8 +176,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="5sp"
                 android:text="@string/details_alarm_tone_default"
+                android:textColor="@android:color/white"
                 android:textSize="14sp" />
+            
         </LinearLayout>
 
         <View
@@ -193,9 +209,11 @@
                 	android:layout_width="wrap_content"
                 	android:layout_height="wrap_content"
                 	android:layout_marginTop="@dimen/activity_vertical_margin"
+                	android:layout_marginLeft="5sp"
                 	android:layout_centerVertical="true"
                 	android:layout_alignParentLeft="true"
                 	android:text="@string/details_alarm_vibrate"
+                	android:textColor="@android:color/white"
                 	android:textSize="18sp" />
 
             	<CheckBox
@@ -228,7 +246,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="5sp"
                 android:text="@string/details_alarm_game"
+                android:textColor="@android:color/white"
                 android:textSize="18sp" />
 
             <TextView
@@ -236,7 +256,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="5sp"
                 android:text="@string/details_alarm_game_default"
+                android:textColor="@android:color/white"
                 android:textSize="14sp" />
         </LinearLayout>
         

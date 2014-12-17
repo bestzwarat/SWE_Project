@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgalarm" >
+
+    <ImageView
+        android:id="@+id/alarm_record_label"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+       	android:src="@drawable/record_label" />
+    
+    <Button
+        android:id="@+id/record_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_red_dark"
+        android:layout_below="@+id/alarm_record_label"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:text="@string/record_start"
+        android:textSize="20sp"
+        android:textColor="@android:color/white" />
+    
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@color/dkgray"
+        android:layout_below="@+id/record_button"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:text="@string/record_play"
+        android:textSize="15sp"
+        android:textColor="@android:color/white" />
+    
+    <Button
+        android:id="@+id/choose_button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/holo_green_dark"
+        android:paddingTop="25dp"
+        android:paddingBottom="25dp"
+        android:text="@string/record_ok"
+        android:textSize="20sp"
+        android:textColor="@android:color/white" />
+
+
+</RelativeLayout>

@@ -3,17 +3,11 @@ package com.swe.wakeupnow;
 import java.util.Random;
 
 import android.app.Activity;
-import android.content.res.Resources;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
-import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
-import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,7 +15,6 @@ public class MatchGameActivity extends Activity implements OnItemClickListener{
 	
 	MatchGameActivity gridview;
     ImageView imageView, firstView;
-   
     
     private Integer[] mThumbIds = { R.drawable.one, R.drawable.one,
             R.drawable.two, R.drawable.two , R.drawable.three,
@@ -90,15 +83,16 @@ public class MatchGameActivity extends Activity implements OnItemClickListener{
             if (mThumbIds[firstClick].compareTo(mThumbIds[secondClick]) == 0) {
                 Toast.makeText(MatchGameActivity.this, "That's Great!",
                         Toast.LENGTH_SHORT).show();
-                handler.postDelayed(removeImage, 500);
+                handler.postDelayed(removeImage, 300);
                 pairRight++;
                 if (pairRight == pairPic) {
                 	//finish
-					Toast.makeText(getBaseContext(), "Wake Up Now!!!", Toast.LENGTH_LONG).show();
+//					Toast.makeText(getBaseContext(), "Wake Up Now!!!", Toast.LENGTH_LONG).show();
+                	setResult(RESULT_OK);
                 	finish();
                 }
             } else {
-                handler.postDelayed(cardBack, 500);
+                handler.postDelayed(cardBack, 300);
             }
         }}
     }
@@ -117,5 +111,4 @@ public class MatchGameActivity extends Activity implements OnItemClickListener{
             opened = 0;
         }
     }; 
-    
 }

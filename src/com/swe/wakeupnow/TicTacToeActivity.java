@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 public class TicTacToeActivity extends Activity {
 	
-	private AlarmScreen alarmScreen;
 	private TicTacToeGame mGame;
 	private BoardView mBoardView;
 	private TextView mInfoTextView;
@@ -135,8 +134,9 @@ public class TicTacToeActivity extends Activity {
 		}
 		else if(winner == 2){
 			//humanwin
-			Toast.makeText(getBaseContext(), "Wake Up Now!!!", Toast.LENGTH_LONG).show();
+//			Toast.makeText(getBaseContext(), "Wake Up Now!!!", Toast.LENGTH_LONG).show();
 //			alarmScreen.stopMediaOrVibrate();
+			setResult(RESULT_OK);
 			finish();
 		}
 		else{

@@ -11,11 +11,8 @@ import android.widget.Toast;
 
 public class MathDashActivity extends Activity {
 	
-
 	private int correct = 0;
-	private int total = 7;
-	private TextView solvedTextView;
-	private TextView answerTextView;
+	private int total = 10;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,24 +26,31 @@ public class MathDashActivity extends Activity {
 	private void refreshEquation() {
 		final RandomEquation randomEquation = new RandomEquation();
 
-		answerTextView = (TextView) findViewById(R.id.gameEquation);
+		TextView answerTextView = (TextView) findViewById(R.id.gameEquation);
 		answerTextView.setText(randomEquation.equation);
-		solvedTextView = (TextView) findViewById(R.id.gameSolved);
-		solvedTextView.setText(correct + "/" + total);
 
 		View.OnClickListener clickListener = new View.OnClickListener() {
 
 			public void onClick(View v) {
 				if (((Button) v).getText() == Integer.toString(randomEquation.answer)) {
+//					Toast.makeText(getBaseContext(), "You right!", Toast.LENGTH_SHORT).show();
 					correct += 1;
 					if (correct == total) {
 						//finish
-						Toast.makeText(getBaseContext(), "Wake Up Now!!!", Toast.LENGTH_LONG).show();
+//						Toast.makeText(getBaseContext(), "Wake Up Now!!!", Toast.LENGTH_LONG).show();
+						setResult(RESULT_OK);
 						finish();
 					}
+					else {
+						refreshEquation();
+					}
 				}
+				else {
+					correct = 0;
+					refreshEquation();
+				}
+				TextView solvedTextView = (TextView) findViewById(R.id.gameSolved);
 				solvedTextView.setText(correct + "/" + total);
-				refreshEquation();
 			}
 		};
 
@@ -66,4 +70,5 @@ public class MathDashActivity extends Activity {
 		gameButton4.setText(Integer.toString(randomEquation.answer4));
 		gameButton4.setOnClickListener(clickListener);
 	}
+	
 }

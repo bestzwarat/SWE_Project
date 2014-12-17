@@ -1,10 +1,14 @@
 package com.swe.wakeupnow;
 
+import java.io.File;
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.Menu;
@@ -38,6 +42,7 @@ public class AlarmDetailsActivity extends Activity {
 	private TextView txtToneSelection;
 	private CheckBox checkBox;
 	private TextView txtGameSelection;
+	private AlertDialog toneDialog;
 	private AlertDialog gameDialog;
 	
 	@Override
@@ -82,7 +87,7 @@ public class AlarmDetailsActivity extends Activity {
 			chkTuesday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.TUESDAY));
 			chkWednesday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.WEDNESDAY));
 			chkThursday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.THURSDAY));
-			chkFriday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.FRDIAY));
+			chkFriday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.FRIDAY));
 			chkSaturday.setChecked(alarmDetails.getRepeatingDay(AlarmModel.SATURDAY));
 			txtToneSelection.setText(RingtoneManager.getRingtone(this, alarmDetails.alarmTone).getTitle(this));
 			txtGameSelection.setText(alarmDetails.game);
@@ -94,8 +99,7 @@ public class AlarmDetailsActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
-				startActivityForResult(intent , 1);
+				createToneDialog();
 			}
 		});
 		
@@ -128,22 +132,94 @@ public class AlarmDetailsActivity extends Activity {
 		});
 	}
 	
+	private void createToneDialog() {
+		final CharSequence[] items = {"Select form your phone","Record"};
+
+        // Creating and Building the Dialog 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose alarm tone from");
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+        	Intent intent;
+            switch(item)
+            {
+                case 0:
+                	intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
+    				startActivityForResult(intent , 1);
+                    break;
+                case 1:
+                	intent = new Intent(AlarmDetailsActivity.this, RecordActivity.class);
+                	startActivityForResult(intent , 2);
+                    break;
+            }
+            toneDialog.dismiss();
+            }
+        });
+        toneDialog = builder.create();
+        toneDialog.show();
+	}
+	
+	private void createGameDialog() {
+		final CharSequence[] items = {"None","Calculation Game","Picture Pair Game","Tic Tac Toe Game"};
+
+        // Creating and Building the Dialog 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select your game");
+        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+           
+            switch(item)
+            {
+                case 0:
+                	txtGameSelection.setText(R.string.game_none);
+                	alarmDetails.game = "None";
+                    break;
+                case 1:
+                	txtGameSelection.setText(R.string.game_math);
+                	alarmDetails.game = "Calculation Game";
+                    break;
+                case 2:
+                	txtGameSelection.setText(R.string.game_match);
+                	alarmDetails.game = "Picture Pair Game";
+                    break;
+                case 3:
+                	txtGameSelection.setText(R.string.game_ttt);
+                	alarmDetails.game = "Tic Tac Toe Game";
+                    break;
+            }
+            gameDialog.dismiss();
+            }
+        });
+        gameDialog = builder.create();
+        gameDialog.show();
+	}
+	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
-		if (resultCode == RESULT_OK) {
-	        switch (requestCode) {
-		        case 1: {
-		        	alarmDetails.alarmTone = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
-		        	txtToneSelection.setText(RingtoneManager.getRingtone(this, alarmDetails.alarmTone).getTitle(this));
-		            break;
+		if (requestCode == 1) {
+			if (resultCode == RESULT_OK) {
+		        switch (requestCode) {
+			        case 1: {			        	
+			        	alarmDetails.alarmTone = data.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
+//			        	Toast.makeText(getBaseContext(), alarmDetails.alarmTone.toString(), Toast.LENGTH_LONG).show();
+			        	txtToneSelection.setText(RingtoneManager.getRingtone(this, alarmDetails.alarmTone).getTitle(this));
+			            break;
+			        }
+			        default: {
+			            break;
+			        }
 		        }
-		        default: {
-		            break;
-		        }
-	        }
-	    }
+		    }
+		}
+		if (requestCode == 2) {
+			if (resultCode == RESULT_OK) {
+				String path = data.getStringExtra("result");
+				alarmDetails.alarmTone = Uri.fromFile(new File(path));
+//				Toast.makeText(getBaseContext(), alarmDetails.alarmTone.toString(), Toast.LENGTH_LONG).show();
+				txtToneSelection.setText("Your sound record");
+			}
+		}
 	}
 	
 	@Override
@@ -161,6 +237,7 @@ public class AlarmDetailsActivity extends Activity {
 				break;
 			}
 			case R.id.action_save_alarm_details: {
+				
 				if (alarmDetails.alarmTone == null) {
 					Toast.makeText(getBaseContext(), R.string.alert_ringtone, Toast.LENGTH_LONG).show();
 				}
@@ -191,55 +268,28 @@ public class AlarmDetailsActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	private void updateModelFromLayout() {		
+	private void updateModelFromLayout() {
 		alarmDetails.timeMinute = timePicker.getCurrentMinute().intValue();
 		alarmDetails.timeHour = timePicker.getCurrentHour().intValue();
 		alarmDetails.name = edtName.getText().toString();
-		alarmDetails.repeatWeekly = chkWeekly.isChecked();	
+		alarmDetails.repeatWeekly = chkWeekly.isChecked();
 		alarmDetails.setRepeatingDay(AlarmModel.SUNDAY, chkSunday.isChecked());	
 		alarmDetails.setRepeatingDay(AlarmModel.MONDAY, chkMonday.isChecked());	
 		alarmDetails.setRepeatingDay(AlarmModel.TUESDAY, chkTuesday.isChecked());
 		alarmDetails.setRepeatingDay(AlarmModel.WEDNESDAY, chkWednesday.isChecked());	
 		alarmDetails.setRepeatingDay(AlarmModel.THURSDAY, chkThursday.isChecked());
-		alarmDetails.setRepeatingDay(AlarmModel.FRDIAY, chkFriday.isChecked());
+		alarmDetails.setRepeatingDay(AlarmModel.FRIDAY, chkFriday.isChecked());
 		alarmDetails.setRepeatingDay(AlarmModel.SATURDAY, chkSaturday.isChecked());
+		
+		if (alarmDetails.getRepeatingDay(0) == false && alarmDetails.getRepeatingDay(1) == false
+				&& alarmDetails.getRepeatingDay(2) == false && alarmDetails.getRepeatingDay(3) == false
+				&& alarmDetails.getRepeatingDay(4) == false && alarmDetails.getRepeatingDay(5) == false
+						&& alarmDetails.getRepeatingDay(6) == false) {
+//			Toast.makeText(getBaseContext(), "Don't has a check", Toast.LENGTH_SHORT).show();
+			Calendar c = Calendar.getInstance();
+			int today = c.get(Calendar.DAY_OF_WEEK);
+			alarmDetails.setRepeatingDay(today-1,true);
+		}
 		alarmDetails.isEnabled = true;
 	}
-	
-	private void createGameDialog() {
-		final CharSequence[] items = {"None","Mathematics Game","Matching Game","Tic Tac Toe Game"};
-
-        // Creating and Building the Dialog 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select your game");
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int item) {
-           
-            
-            switch(item)
-            {
-                case 0:
-                	txtGameSelection.setText(R.string.game_none);
-                	alarmDetails.game = "None";
-                    break;
-                case 1:
-                	txtGameSelection.setText(R.string.game_math);
-                	alarmDetails.game = "Mathematics Game";
-                    break;
-                case 2:
-                	txtGameSelection.setText(R.string.game_match);
-                	alarmDetails.game = "Matching Game";
-                    break;
-                case 3:
-                	txtGameSelection.setText(R.string.game_ttt);
-                	alarmDetails.game = "Tic Tac Toe Game";
-                    break;
-            }
-            gameDialog.dismiss();
-            }
-        });
-        gameDialog = builder.create();
-        gameDialog.show();
-	}
-	
 }

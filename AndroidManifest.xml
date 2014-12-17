@@ -9,6 +9,7 @@
         android:targetSdkVersion="19" />
     
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.RECORD_AUDIO" />
 	<uses-permission android:name="android.permission.VIBRATE" />
 	<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -53,12 +54,11 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <activity android:name="TestGameActivity">
-        </activity>
         <activity android:name="TicTacToeActivity"></activity>
         <activity android:name="MathGameActivity"></activity>
         <activity android:name="MatchGameActivity"></activity>
         <activity android:name="MathDashActivity"></activity>
+        <activity android:name="RecordActivity"></activity>
     </application>
 
 </manifest>
