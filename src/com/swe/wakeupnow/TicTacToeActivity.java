@@ -135,7 +135,7 @@ public class TicTacToeActivity extends Activity {
 		}
 		else if(winner == 2){
 			//humanwin
-			Toast.makeText(getBaseContext(), "You win", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getBaseContext(), "Wake Up Now!!!", Toast.LENGTH_LONG).show();
 //			alarmScreen.stopMediaOrVibrate();
 			finish();
 		}

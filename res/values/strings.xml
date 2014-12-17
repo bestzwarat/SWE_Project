@@ -34,6 +34,8 @@
 	<string name="details_alarm_game">Game</string>
 	<string name="details_alarm_game_default">Select a game to play when alarm</string>
 	
+	<string name="game_solved_label">Solved : </string>
+	
 	<string name="alarmscreen_title">Yeah!!!</string>
 	<string name="alarmscreen_time">00:00</string>
 	<string name="alarmscreen_name">Alarm name</string>

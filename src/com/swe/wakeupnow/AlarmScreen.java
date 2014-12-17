@@ -192,7 +192,7 @@ public class AlarmScreen extends Activity {
 					finish();
 				}
 				else if (game.equals("Mathematics Game")){
-					Intent i = new Intent(AlarmScreen.this, MathGameActivity.class);
+					Intent i = new Intent(AlarmScreen.this, MathDashActivity.class);
 					startActivity(i);
 					finish();
 				}
