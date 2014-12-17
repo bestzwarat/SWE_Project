@@ -28,8 +28,6 @@ public class MatchGameActivity extends Activity implements OnItemClickListener{
            R.drawable.three, R.drawable.four, R.drawable.four,
             R.drawable.five , R.drawable.five , R.drawable.six, 
             R.drawable.six};
-    public int width;
-    public int height;
     
     private int pairRight = 0;
     private int pairPic = 6;
@@ -50,8 +48,8 @@ public class MatchGameActivity extends Activity implements OnItemClickListener{
         
         android.widget.GridView gridview = (android.widget.GridView) findViewById(R.id.gridview1);
         gridview.setNumColumns(numColumns);
-        gridview.setVerticalSpacing (2);
-        gridview.setHorizontalSpacing (2);
+        gridview.setVerticalSpacing (20);
+        gridview.setHorizontalSpacing(2);
         gridview.setAdapter(new ImageAdapter(this));
         gridview.setOnItemClickListener(this); 
          
@@ -96,6 +94,7 @@ public class MatchGameActivity extends Activity implements OnItemClickListener{
                 pairRight++;
                 if (pairRight == pairPic) {
                 	//finish
+					Toast.makeText(getBaseContext(), "Wake Up Now!!!", Toast.LENGTH_LONG).show();
                 	finish();
                 }
             } else {
