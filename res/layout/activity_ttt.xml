@@ -14,20 +14,18 @@
 	android:layout_width="300dp"
 	android:layout_height="300dp"
 	android:layout_marginTop="5dp"
-	android:layout_centerHorizontal="true"/>
+	android:layout_centerHorizontal="true"
+	android:layout_centerVertical="true"/>
 
 <TextView
      android:id="@+id/information"
      android:layout_width="fill_parent"
      android:layout_height="wrap_content"
-     android:layout_alignLeft="@+id/board"
-     android:layout_below="@+id/board"
-     android:layout_marginTop="40dp"
+     android:layout_marginTop="30dp"
      android:gravity="center_horizontal"
-     android:text="info"
+     android:text="@string/ttt_status"
      android:textColor="@android:color/white"
-     android:textAlignment="center"
-     android:textSize="30dp" />
+     android:textSize="30sp" />
  
 
 </RelativeLayout>

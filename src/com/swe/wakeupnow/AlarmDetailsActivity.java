@@ -160,7 +160,7 @@ public class AlarmDetailsActivity extends Activity {
 	}
 	
 	private void createGameDialog() {
-		final CharSequence[] items = {"None","Calculation Game","Picture Pair Game","Tic Tac Toe Game"};
+		final CharSequence[] items = {"None","Random Game","Calculation Game","Picture Pair Game","Tic Tac Toe Game"};
 
         // Creating and Building the Dialog 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -175,14 +175,18 @@ public class AlarmDetailsActivity extends Activity {
                 	alarmDetails.game = "None";
                     break;
                 case 1:
+                	txtGameSelection.setText(R.string.game_random);
+                	alarmDetails.game = "Random Game";
+                    break;
+                case 2:
                 	txtGameSelection.setText(R.string.game_math);
                 	alarmDetails.game = "Calculation Game";
                     break;
-                case 2:
+                case 3:
                 	txtGameSelection.setText(R.string.game_match);
                 	alarmDetails.game = "Picture Pair Game";
                     break;
-                case 3:
+                case 4:
                 	txtGameSelection.setText(R.string.game_ttt);
                 	alarmDetails.game = "Tic Tac Toe Game";
                     break;
@@ -237,7 +241,6 @@ public class AlarmDetailsActivity extends Activity {
 				break;
 			}
 			case R.id.action_save_alarm_details: {
-				
 				if (alarmDetails.alarmTone == null) {
 					Toast.makeText(getBaseContext(), R.string.alert_ringtone, Toast.LENGTH_LONG).show();
 				}
@@ -287,8 +290,23 @@ public class AlarmDetailsActivity extends Activity {
 						&& alarmDetails.getRepeatingDay(6) == false) {
 //			Toast.makeText(getBaseContext(), "Don't has a check", Toast.LENGTH_SHORT).show();
 			Calendar c = Calendar.getInstance();
-			int today = c.get(Calendar.DAY_OF_WEEK);
-			alarmDetails.setRepeatingDay(today-1,true);
+			int currentDay = c.get(Calendar.DAY_OF_WEEK);
+			int currentHour = c.get(Calendar.HOUR_OF_DAY);
+			int currentMin = c.get(Calendar.MINUTE);
+			if (timePicker.getCurrentHour().intValue() < currentHour) {
+				alarmDetails.setRepeatingDay(currentDay,true);
+			}
+			else if (timePicker.getCurrentHour().intValue() < currentHour) {
+				if (timePicker.getCurrentMinute().intValue() <= currentMin) {
+					alarmDetails.setRepeatingDay(currentDay,true);
+				}
+				else {
+					alarmDetails.setRepeatingDay(currentDay-1,true);
+				}
+			}
+			else {
+				alarmDetails.setRepeatingDay(currentDay-1,true);
+			}
 		}
 		alarmDetails.isEnabled = true;
 	}

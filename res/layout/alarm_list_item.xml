@@ -13,29 +13,31 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentTop="true"
-	        android:text="00 : 00"
+	        android:layout_centerVertical="true"
+	        android:text="@string/alarm_time"
+	        android:textSize="25sp"
 	        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 	    <TextView
 	        android:id="@+id/alarm_item_name"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:layout_alignBottom="@+id/alarm_item_time"
-	        android:layout_marginLeft="8dp"
-	        android:layout_marginRight="8dp"
+	        android:layout_marginLeft="10sp"
+	        android:layout_marginRight="8sp"
 	        android:layout_toLeftOf="@+id/alarm_item_toggle"
 	        android:layout_toRightOf="@+id/alarm_item_time"
-	        android:text="Medium Text"
-	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	        android:text="@string/alarm_label"
+	        android:textSize="18sp" />
 
 	    <TextView
 	        android:id="@+id/alarm_item_sunday"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_alignParentLeft="true"
-	        android:layout_below="@+id/alarm_item_time"
-	        android:text="S"
+	        android:layout_toRightOf="@+id/alarm_item_time"
+	        android:layout_below="@+id/alarm_item_name"
+	        android:layout_marginLeft="10sp"
+	        android:text="@string/day_sun"
 	        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 	    <TextView
@@ -44,8 +46,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/alarm_item_sunday"
 	        android:layout_below="@+id/alarm_item_time"
+	        android:layout_alignBaseline="@+id/alarm_item_sunday"
 	        android:layout_marginLeft="4dp"
-	        android:text="M"
+	        android:text="@string/day_mon"
 	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
 	        
 	    <TextView
@@ -54,8 +57,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/alarm_item_monday"
 	        android:layout_below="@+id/alarm_item_time"
+	        android:layout_alignBaseline="@+id/alarm_item_sunday"
 	        android:layout_marginLeft="4dp"
-	        android:text="T"
+	        android:text="@string/day_tue"
 	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
 	        
 	    <TextView
@@ -64,8 +68,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/alarm_item_tuesday"
 	        android:layout_below="@+id/alarm_item_time"
+	        android:layout_alignBaseline="@+id/alarm_item_sunday"
 	        android:layout_marginLeft="4dp"
-	        android:text="W"
+	        android:text="@string/day_wed"
 	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
 	        
 	    <TextView
@@ -74,8 +79,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/alarm_item_wednesday"
 	        android:layout_below="@+id/alarm_item_time"
+	        android:layout_alignBaseline="@+id/alarm_item_sunday"
 	        android:layout_marginLeft="4dp"
-	        android:text="T"
+	        android:text="@string/day_thu"
 	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
 	        
 	    <TextView
@@ -84,8 +90,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/alarm_item_thursday"
 	        android:layout_below="@+id/alarm_item_time"
+	        android:layout_alignBaseline="@+id/alarm_item_sunday"
 	        android:layout_marginLeft="4dp"
-	        android:text="F"
+	        android:text="@string/day_fri"
 	        android:textAppearance="?android:attr/textAppearanceSmall" /> 
 	        
 	    <TextView
@@ -94,8 +101,9 @@
 	        android:layout_height="wrap_content"
 	        android:layout_toRightOf="@+id/alarm_item_friday"
 	        android:layout_below="@+id/alarm_item_time"
+	        android:layout_alignBaseline="@+id/alarm_item_sunday"
 	        android:layout_marginLeft="4dp"
-	        android:text="S"
+	        android:text="@string/day_sat"
 	        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 	    <ToggleButton
@@ -103,8 +111,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignParentRight="true"
-	        android:layout_alignParentTop="true"
-	        android:text="ToggleButton" />
+	        android:layout_centerVertical="true" />
 	        
 	</RelativeLayout>
    

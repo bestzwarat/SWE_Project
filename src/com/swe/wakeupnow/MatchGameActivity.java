@@ -81,8 +81,7 @@ public class MatchGameActivity extends Activity implements OnItemClickListener{
             imageView.setImageResource(mThumbIds[position]);
             imageView.setClickable(false);
             if (mThumbIds[firstClick].compareTo(mThumbIds[secondClick]) == 0) {
-                Toast.makeText(MatchGameActivity.this, "That's Great!",
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(MatchGameActivity.this, "That's Great!", Toast.LENGTH_SHORT).show();
                 handler.postDelayed(removeImage, 300);
                 pairRight++;
                 if (pairRight == pairPic) {

@@ -167,7 +167,7 @@ public class TicTacToeActivity extends Activity {
 				mHumanMediaPlayer.start(); // Play the sound effect
 			}
 			if (player == 'O') {
-				mComputerMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.player);
+				mComputerMediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.com);
 				mComputerMediaPlayer.start(); // Play the sound effect
 			}
 

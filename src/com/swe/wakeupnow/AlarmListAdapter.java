@@ -67,7 +67,13 @@ public class AlarmListAdapter extends BaseAdapter {
 		txtTime.setText(String.format("%02d : %02d", model.timeHour, model.timeMinute));
 		
 		TextView txtName = (TextView) view.findViewById(R.id.alarm_item_name);
-		txtName.setText(model.name);
+		if	(model.name.length() > 12) {
+			model.name = model.name.substring(0, 11) + "...";
+			txtName.setText(model.name);
+		}
+		else {
+			txtName.setText(model.name);
+		}
 		txtName.setTextColor(Color.DKGRAY);
 
 		updateTextColor((TextView) view.findViewById(R.id.alarm_item_sunday), model.getRepeatingDay(AlarmModel.SUNDAY));
@@ -119,5 +125,4 @@ public class AlarmListAdapter extends BaseAdapter {
 			view.setTextColor(Color.LTGRAY);
 		}
 	}
-
 }

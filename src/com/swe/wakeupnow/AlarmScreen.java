@@ -1,13 +1,13 @@
 package com.swe.wakeupnow;
 
 import java.util.Calendar;
+import java.util.Random;
+
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -26,11 +26,13 @@ import android.widget.TextView;
 
 public class AlarmScreen extends Activity {
 	
+	
 	public final String TAG = this.getClass().getSimpleName();
 
 	private WakeLock mWakeLock;
 	private MediaPlayer mPlayer;
 	private Vibrator mVibrate;
+//	private int id;
 	private String name;
 	private int timeHour;
 	private int timeMinute;
@@ -48,6 +50,14 @@ public class AlarmScreen extends Activity {
 		//Setup layout
 		this.setContentView(R.layout.activity_alarm_screen);
 
+//		
+//		id  = getIntent().getIntExtra(AlarmManagerHelper.ID, 0);
+//		alarmDetails = dbHelper.getAlarm(id);
+//		alarmDetails.isEnabled = false;
+//		AlarmManagerHelper.cancelAlarms(this);
+//		dbHelper.updateAlarm(alarmDetails);
+//		AlarmManagerHelper.setAlarms(this);
+		
 		name = getIntent().getStringExtra(AlarmManagerHelper.NAME);
 		timeHour = getIntent().getIntExtra(AlarmManagerHelper.TIME_HOUR, 0);
 		timeMinute = getIntent().getIntExtra(AlarmManagerHelper.TIME_MINUTE, 0);
@@ -131,12 +141,27 @@ public class AlarmScreen extends Activity {
 		new Handler().postDelayed(releaseWakelock, WAKELOCK_TIMEOUT);
 	}
 	
+//	private void updateModel() {
+//		alarmDetails.timeMinute = alarmDetails.timeMinute;
+//		alarmDetails.timeHour = alarmDetails.timeHour;
+//		alarmDetails.name = alarmDetails.name;
+//		alarmDetails.repeatWeekly = alarmDetails.repeatWeekly;
+//		alarmDetails.setRepeatingDay(AlarmModel.SUNDAY, alarmDetails.getRepeatingDay(AlarmModel.SUNDAY));	
+//		alarmDetails.setRepeatingDay(AlarmModel.MONDAY, alarmDetails.getRepeatingDay(AlarmModel.MONDAY));	
+//		alarmDetails.setRepeatingDay(AlarmModel.TUESDAY, alarmDetails.getRepeatingDay(AlarmModel.TUESDAY));
+//		alarmDetails.setRepeatingDay(AlarmModel.WEDNESDAY, alarmDetails.getRepeatingDay(AlarmModel.WEDNESDAY));	
+//		alarmDetails.setRepeatingDay(AlarmModel.THURSDAY, alarmDetails.getRepeatingDay(AlarmModel.THURSDAY));
+//		alarmDetails.setRepeatingDay(AlarmModel.FRIDAY, alarmDetails.getRepeatingDay(AlarmModel.FRIDAY));
+//		alarmDetails.setRepeatingDay(AlarmModel.SATURDAY, alarmDetails.getRepeatingDay(AlarmModel.SATURDAY));
+//		alarmDetails.isEnabled = false;
+//	}
+
 	@SuppressWarnings("deprecation")
 	@Override
 	protected void onResume() {
 		super.onResume();
 
-		mVibrate.vibrate(pattern, 0);
+//		mVibrate.vibrate(pattern, 0);
 		
 		// Set the window to keep screen on
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
@@ -147,7 +172,7 @@ public class AlarmScreen extends Activity {
 		// Acquire wakelock
 		PowerManager pm = (PowerManager) getApplicationContext().getSystemService(Context.POWER_SERVICE);
 		if (mWakeLock == null) {
-			mWakeLock = pm.newWakeLock((PowerManager.FULL_WAKE_LOCK | PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), TAG);
+			this.mWakeLock = pm.newWakeLock((PowerManager.FULL_WAKE_LOCK | PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP), TAG);
 		}
 
 		if (!mWakeLock.isHeld()) {
@@ -190,6 +215,12 @@ public class AlarmScreen extends Activity {
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
 				System.out.println(game);
+				if (game.equals("Random Game")) {
+					String setOfGame[] = {"Calculation Game", "Picture Pair Game", "Tic Tac Toe Game"};
+					Random random = new Random();
+					int randomGame = random.nextInt(3);
+					game = setOfGame[randomGame];
+				}
 				if (game.equals("Calculation Game")){
 					Intent intent = new Intent(AlarmScreen.this, MathDashActivity.class);
     				startActivityForResult(intent , 1);

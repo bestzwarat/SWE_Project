@@ -81,7 +81,7 @@ public class MainActivity extends ListActivity {
 		final long alarmId = id;
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Please confirm")
-		.setTitle("Delete set?")
+		.setTitle("Delete this alarm set?")
 		.setCancelable(true)
 		.setNegativeButton("Cancel", null)
 		.setPositiveButton("Ok", new OnClickListener() {
